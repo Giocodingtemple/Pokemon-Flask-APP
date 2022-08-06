@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-link" href="{{url_for('main.index')}}">Home</a>
-            <a class="nav-link" href="{{url_for('main.pokemon')}}">PokeApi</a>
+            <a class="nav-link" href="{{url_for('main.poke_name')}}">PokeApi</a>
             {% if current_user.is_anonymous %}
             <a class="nav-link" href="{{url_for('main.index')}}">Login</a>
             <a class="nav-link" href="{{url_for('auth.register')}}">Register</a>

@@ -1,58 +1,45 @@
 {% extends 'base.html.j2' %}
-
 {% block title %}
-PokeApi
+Catch Pokemon
 {% endblock %}
 
 {% block content %}
-    <h1>Pokemon Details</h1>
-    <p>Please enter the name of any Pokemon.</p>
-    <form action="/pokemon" method="POST">
-        {{ form.hidden_tag() }}
-
-        {# name field #}
-        {{ form.name.label(class="form-label") }}
-        {{ form.name(class="form-control") }}
-        <br>
-        {# submit button #}
-        {{ form.submit(class="btn btn-primary") }}
-    </form>
-
-    {% if error %}
-        <small style="color:red;">{{error}}</small>
-    {% else %}
-        <small style="color:red;"></small>
-    {% endif %}
+      <h1>Capture Your Team!</h1>
+      <form action="{{url_for('pokemon')}}" method="POST">
+      {{form.hidden_tag()}}
+      <div class="mb-3">
+          {{form.pokemon_name.label(class="form-label")}}
+          {{form.pokemon_name(class="form-control", style= "width:30%;")}}
+          {% for error in form.pokemon_name.errors%}
+              <p>{{error}}</p>
+           {% endfor %}
+        </div>
+        <div>
+        {{form.submit(class="btn btn-primary")}}<br>
+         <p>{{error}}</p>
+       </div>
+      </form>
 
     {% if pokemon %}
-        <br>
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Order</th>
-                    <th scope="col">HP</th>
-                    <th scope="col">Defense</th>
-                    <th scope="col">Attack</th>
-                    <th scope="col">Sprite URL</th>
-                    <th scope="col">Image</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for pokemon_val in pokemon %}
-                <tr>
-                    <th scope="row">{{pokemon_val['id']}}</th>
-                    <th scope="row">{{pokemon_val['name']}}</th>
-                    <td>{{pokemon_val['order']}}</td>
-                    <td>{{pokemon_val['hp']}}</td>
-                    <td>{{pokemon_val['defense']}}</td>
-                    <td>{{pokemon_val['attack']}}</td>
-                    <td>{{pokemon_val['url']}}</td>
-                    <td><img src={{pokemon_val['url']}} alt="Loading.." border="3" height=100 width=100></img></td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% endif %}
+    <div class="pokemon_card">  
+    <div class="more_card">
+    <div class="card" style="width: 30rem; height: 30%">
+    <div class="poke_img">
+    <img src="{{pokemon['photo']}}" class="card-img" width="300" height="400">
+    </div>
+    <div class="card-body">
+    <h5 class="card-title">{{pokemon['name']}}</h5>
+    </div>
+    <div class="bottom">
+    <ul class="list-group list-group-flush">
+    <li class="abilities">Ability: {{pokemon['ability']}}</li>
+    <li class="base_experiance">Base exerience: {{pokemon['base exerience']}}</li>
+    <li class="attack">Base Attack Stat: {{pokemon['attack base stat']}}</li>
+    <li class="health">Health points: {{pokemon['hp base stat']}}</li>
+    <li class="defense">Base Defense Stat: {{pokemon['defense stat']}}</li>
+     </ul>
+     </div>
+     
+</div>
+{% endif %}
 {% endblock %}
