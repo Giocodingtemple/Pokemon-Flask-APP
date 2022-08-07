@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "pokemon",
+            "connectString": "postgresql://lhvrowxx:IUZYWh9jA928GrZzx-PsiHWPghxIfEOo@otto.db.elephantsql.com/lhvrowxx"
+        }
+    ]
+}

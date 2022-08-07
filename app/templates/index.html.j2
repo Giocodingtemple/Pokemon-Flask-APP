@@ -1,10 +1,15 @@
 {% extends 'base.html.j2' %}
-
 {% block title %}
-  Pokemon
+    Homepage
+{% endblock %}
+
+{%block css %}
+ <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
 {% endblock %}
 
 {% block content %}
-  <h1>Welcome to Pokemon page</h1>
-  <p>Search for a pokemon using the Pokemon menu</p>
+    <h1>Here you can find any pokemon in the PokeAPI database.</h1>
+    <h5>this allows us to look at a specific pokemon to our choosing</h5>
+    for the history of the pokemon use the <a href="https://bulbapedia.bulbagarden.net/wiki/History_of_Pokemon">History of Pokemon</a> Website to see the information about the specific pokemon.
+    to look up a specific pokemon use the <a href="https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_name">List of Pokemon</a> to look up the exact spelling of a pokemon you know but cant spell.    
 {% endblock %}

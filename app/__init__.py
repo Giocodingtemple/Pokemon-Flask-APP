@@ -8,26 +8,24 @@ from flask_login import LoginManager
 app = Flask(__name__)
 app.config.from_object(Config)
 
+## Registering plugin/exts
 
-
-#registering plug ins
-#init for database managment
+# init for database management
 db = SQLAlchemy(app)
-migrate = Migrate(app,db)
+migrate = Migrate(app, db)
 
-#login
-
+# Login
 login = LoginManager(app)
 
-
-#configure some settings
+# Configure some Settings
 login.login_view = 'login'
-login.login_message = 'Log In first!'
+login.login_message = 'Log yourself in or your fired'
 login.login_message_category = 'warning'
-from app import models
 
 from.blueprints.auth import bp as auth_bp
 app.register_blueprint(auth_bp)
 
-from.blueprints.main import bp as main_bp
-app.register_blueprint(main_bp)
+from.blueprints.pokemon import bp as pokemon_bp
+app.register_blueprint(pokemon_bp)
+
+from app import models

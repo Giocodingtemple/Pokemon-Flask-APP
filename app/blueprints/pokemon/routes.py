@@ -1,18 +1,17 @@
-from multiprocessing.context import SpawnContext
 from flask import render_template, request, url_for, flash, redirect
 import requests
 from .forms import *
-from app.models import User, Pokemon
-from flask_login import login_user, login_required, logout_user, current_user
+from app.models import Pokemon
+from flask_login import login_required, current_user
 from . import bp as pokemon
 
 @pokemon.route('/')
 def index():
     return render_template('index.html.j2')
 
-@pokemon.route('/finder', methods=['GET', 'POST'])
+@pokemon.route('/pokemon', methods=['GET', 'POST'])
 def finder():
-    form = PokemonForm()
+    form = PokeForm()
     if request.method == 'POST':
         poke_name = form.poke_name.data.lower()
 
@@ -20,7 +19,7 @@ def finder():
         response = requests.get(url)
         if not response.ok:
             error_string = 'An Error has Occured while trying to preform this search'
-            return render_template('finder.html.j2', error=error_string, form=form)
+            return render_template('pokemon.html.j2', error=error_string, form=form)
         
         pokemon = response.json()
         this_poke = {
@@ -35,9 +34,9 @@ def finder():
         }
         
         print(current_user.pokemon.all())
-        return render_template('finder.html.j2', poke=this_poke, name=poke_name.title(), space_in_team=len(current_user.pokemon.all()) < 6,form=form)
+        return render_template('pokemon.html.j2', poke=this_poke, name=poke_name.title(), space_in_team=len(current_user.pokemon.all()) < 6,form=form)
     
-    return render_template('finder.html.j2', form=form)
+    return render_template('pokemon.html.j2', form=form)
 
 @pokemon.route('/catch_pokemon/<poke_name>', methods=['GET', 'POST'])
 @login_required
@@ -72,7 +71,7 @@ def catch_pokemon(poke_name):
 @pokemon.route('/my_team')
 @login_required
 def my_team():
-    return render_template('my_team.html.j2', pokemon=current_user.pokemon.all())
+    return render_template('pokemon.html.j2', pokemon=current_user.pokemon.all())
 
 @pokemon.route('/release_pokemon/<int:id>')
 def release_pokemon(id):
