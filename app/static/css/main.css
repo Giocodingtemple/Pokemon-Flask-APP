@@ -9,6 +9,7 @@ body{
     height: 100%;
     margin: 50px 30px;
     background-color: #3064a0;
+    color: gold;
 }
 
 .card{
@@ -31,3 +32,4 @@ body{
     align-items: center;
     padding-top: 10px;
 }
+
