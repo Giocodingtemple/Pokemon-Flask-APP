@@ -7,10 +7,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-link" href="{{url_for('pokemon.index')}}">Home</a>
             {% if current_user.is_anonymous %}
             <a class="nav-link" href="{{url_for('auth.login')}}">Login</a>
             <a class="nav-link" href="{{url_for('auth.register')}}">Register</a>
+            
             {% endif%}
 
             {%if current_user.is_authenticated%}
